@@ -9,7 +9,7 @@ ADD alpine-minirootfs-3.21.3-x86_64.tar.gz /
 WORKDIR /app
 
 # Instalacja Go, GCC, i libc-dev w Alpine (potrzebne do kompilacji)
-RUN apk add --no-cache go libc-dev gcc openssh-client git url tar
+RUN apk add --no-cache go libc-dev gcc openssh-client git tar
 
 # Pobranie klucza publicznego z github
 RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
