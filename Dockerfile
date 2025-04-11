@@ -36,10 +36,10 @@ COPY --from=builder /app/myapp /usr/share/nginx/html/
 RUN chmod +x /usr/share/nginx/html/myapp
 
 # Skopiowanie pliku konfiguracyjnego Nginx
-COPY default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /app/PAwChO_LAB06/default.conf /etc/nginx/conf.d/default.conf
 
 # Skrypt uruchamiający aplikację Go i Nginx
-COPY start.sh /start.sh
+COPY --from=builder /app/PAwChO_LAB06/start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Sprawdzanie poprawności działania serwera
