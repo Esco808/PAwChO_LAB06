@@ -1,25 +1,31 @@
 # Link do DockerHub:
-https://hub.docker.com/r/ostrowski2000/lab5 lub docker pull ostrowski2000/lab5
-
+https://hub.docker.com/r/ostrowski2000/lab6
+lub
+```bash
+docker pull ostrowski2000/lab6
+```
 # Użyte polecenia:
 ```bash
-docker init
-touch main.go
-code main.go
+gh repo create
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_ed25519
+echo $SSH_AUTH_SOCK
 code Dockerfile
-docker build --build-arg VERSION=1.0.0 -t myapp .
-docker run -p 8080:8080 myapp
+DOCKER_BUILDKIT=1 docker build --build-arg VERSION=1.0.2 --ssh default -t lab6 .
+docker run -p 8080:80 lab6
 ```
-![Wynik działania kontenera](./img/etap1.JPG)
+# Wynik działania kontenera:
+![Wynik działania kontenera](./img/server.JPG)
+
+# Przesyłanie obrazu do repozytorium na github:
 ```bash
-code Dockerfile
-touch default.conf
-code default.conf
-touch start.sh
-code start.sh
-docker build --build-arg VERSION=1.0.1 -t myapp-nginx .
-docker run --rm -dp 8080:80 myapp-nginx
-docker ps
+cat ~/token.txt | docker login ghcr.io -u Esco808 --password-stdin
+docker tag lab6 ghcr.io/esco808/lab6
+docker push ghcr.io/esco808/lab6
 ```
-![Wynik działania kontenera](./img/etap2.JPG)
-![HEALTHCHECK](./img/ps.JPG)
+
+# Przesyłanie obrazu na dockerhub:
+```bash
+docker tag lab6 ostrowski2000/lab6
+docker push ostrowski2000/lab6
+```
